@@ -1,8 +1,9 @@
 import { useState } from 'react';
-
+import { Button } from 'antd';
+import './game.css'
 function Square({ value, onSquareClick }) {
   return (
-    <button style={{backgroundColor: 'red',height: '40px',width: '40px'}} onClick={onSquareClick}>
+    <button className='square' onClick={onSquareClick}>
       {value}
     </button>
   );
@@ -38,6 +39,7 @@ function Board({ xIsNext, squares, onPlay }) {
     } else {
       nextSquares[i] = 'O';
     }
+    console.log('nextSquares', nextSquares);
     onPlay(nextSquares);
   }
 
@@ -76,7 +78,7 @@ export default function Game() {
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
-
+  console.log('currentSquares', currentSquares);
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
@@ -96,7 +98,7 @@ export default function Game() {
     }
     return (
       <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
+        <Button onClick={() => jumpTo(move)}>{description}</Button>
       </li>
     );
   });

@@ -1,7 +1,7 @@
 
 import { Layout, Menu } from 'antd';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 const { Sider } = Layout;
 
 const siderStyle = {
@@ -12,9 +12,12 @@ const siderStyle = {
 };
 
 const items = [
-  { label: <Link to="/about">About</Link>, key: '1', },
-  { label: <Link to="/game">game</Link>, key: '2'},
-  { label: 'Navigation Three', key: 'sub1', 
+  { label: <Link to="/about">About</Link>, key: 'about', },
+  { label: 'game', key: 'game'},
+  { label: 'places', key: 'places'},
+  { label: 'test', key: 'test'},
+  { label: 'context', key: 'context'},
+  { label: 'Navigation one', key: 'one', 
     children: [
       { label: 'Option 3', key: '3'},
       { label: 'Option 4', key: '4'},
@@ -34,6 +37,12 @@ const items = [
 ];
 
 export const SapiSide = () => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation(); // 获取当前url
+  const handleClick = (e) => {
+    console.log('key', e.key);
+    navigate(e.key);
+  }
   return (
     <Sider style={siderStyle}>
       <Menu
@@ -43,6 +52,8 @@ export const SapiSide = () => {
         mode={'inline'}
         theme={'light'}
         items={items}
+        selectedKeys={[pathname]}
+        onClick={handleClick}
       />
     </Sider>
   )

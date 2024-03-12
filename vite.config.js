@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-react-components/vite'
-// import { AntdResolver } from 'unplugin-react-components'
+// import { AntdResolver, MuiResolver } from 'unplugin-react-components'
 import vitePluginImp from 'vite-plugin-imp'
 const srcPath = path.resolve(__dirname, "src");
 // https://vitejs.dev/config/
@@ -22,8 +22,13 @@ export default defineConfig({
       dts: path.resolve(srcPath, "types", "auto-imports.d.ts"), // 指定自动导入函数TS类型声明文件路径
     }),
     Components({
+      dts: true,
+      // resolvers: [
+      //   AntdResolver(),
+      //   MuiResolver()
+      // ],
       // resolvers: [AntdResolver()],
-      dts: path.resolve(srcPath, "types", "components.d.ts"), // 指定自动导入组件TS类型声明文件路径
+      // dts: path.resolve(srcPath, "types", "components.d.ts"), // 指定自动导入组件TS类型声明文件路径
     })
   ],
   resolve: {
